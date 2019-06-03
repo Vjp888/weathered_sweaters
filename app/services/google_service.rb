@@ -5,6 +5,12 @@ class GoogleService
     JSON.parse(response.body, symbolize_names: true)
   end
 
+  def get_address(coords)
+    conn = Faraday.new('https://maps.googleapis.com/maps/api/geocode/')
+    response = conn.get("json?" + coord_prep(coords) + api_key)
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
   private
 
   def api_key
@@ -13,5 +19,9 @@ class GoogleService
 
   def address_prep(address)
     "address=#{address.gsub(/,/, '+')}"
+  end
+
+  def coord_prep(coords)
+    "latlng=#{coords[:lat]},#{coords[:long]}"
   end
 end
