@@ -13,6 +13,6 @@ class AmypodeService
   end
 
   def api_key
-    'oscar_the_grouch'
+    ENV['AMYPODE_KEY']
   end
 end
