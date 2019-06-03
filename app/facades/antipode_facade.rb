@@ -6,12 +6,14 @@ attr_reader :id, :location_name, :type, :forecast, :search_location
     @location = location
     @search_location = collect_location[:location]
     @location_name = collect_antipode(collect_location[:lat], collect_location[:lng])
+    # binding.pry
     # @forcast = collect_forecast
     # binding.pry
   end
 
   def collect_forecast
-    darksky = DarkskyService.new.get_weather()
+    # darksky = DarkskyService.new.get_weather()
+    #flubbed this one kinda hard
   end
 
   def collect_location
@@ -20,7 +22,7 @@ attr_reader :id, :location_name, :type, :forecast, :search_location
         geo_coords = geo_code.get_geo_coord(@location)
         @_total_data = geo_coords[:results].first[:geometry][:location]
         @_total_data[:location] = geo_coords[:results].first[:formatted_address]
-        @_total_data
+        @_total_data #needs to break out
       end
   end
 
