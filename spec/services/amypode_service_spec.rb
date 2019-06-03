@@ -8,8 +8,8 @@ describe AmypodeService do
     result = amypode_service.get_antipode(lat,long)
 
     expect(result).to be_a(Hash)
-    expect(result[:type]).to eq("antipode")
-    expect(result[:attributes][:lat]).to eq(-27)
-    expect(result[:attributes][:long]).to eq(98)
+    expect(result[:data][:type]).to eq("antipode")
+    expect(result[:data][:attributes][:lat]).to eq(-27.0)
+    expect(result[:data][:attributes][:long]).to eq(98.0)
   end
 end
