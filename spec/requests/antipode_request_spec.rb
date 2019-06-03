@@ -10,7 +10,7 @@ describe 'antipode requests' do
     data = coords['data']
 
     expect(data['type']).to eq('antipode')
-    expect(data['attributes']['lat']).to eq(-27.0)
-    expect(data['attributes']['ong']).to eq(98.0)
+    expect(data['attributes']['location_name']).to eq('Yavi Department')
+    expect(data['attributes']['forecast']['summary']).to eq('cloudy')
   end
 end
