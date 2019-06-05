@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       get '/backgrounds', to: 'backgrounds#show'
       resources :users, only: [:create]
       post '/sessions', to: 'sessions#create'
+      resources :favorites, only: [:create, :index]
+      delete '/favorites', to: 'favorites#delete'
     end
   end
 end
