@@ -35,4 +35,30 @@ describe 'When I visit /forecasts', type: :request do
     expect(daily).to have_key('high_temp')
     expect(daily).to have_key('low_temp')
   end
+
+  it 'will save the forecast to the database if it is not present' do
+    expect(City.all.count).to eq(0)
+
+    get '/api/v1/forecast?location=denver,co'
+
+    data = JSON.parse(response.body)
+
+    expect(City.all.count).to eq(1)
+  end
+
+  it 'will only create on forecast if the forecast is searched multiple times' do
+    expect(City.all.count).to eq(0)
+
+    get '/api/v1/forecast?location=denver,co'
+
+    expect(City.all.count).to eq(1)
+
+    get '/api/v1/forecast?location=denver,co'
+
+    expect(City.all.count).to eq(1)
+
+    get '/api/v1/forecast?location=boulder,co'
+
+    expect(City.all.count).to eq(2)
+  end
 end

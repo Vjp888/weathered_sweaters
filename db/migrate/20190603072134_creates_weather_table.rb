@@ -4,7 +4,7 @@ class CreatesWeatherTable < ActiveRecord::Migration[5.2]
       t.text :city_name
       t.float :latitude
       t.float :longitude
-      t.json :weather
+      t.jsonb :weather
 
       t.timestamps
     end

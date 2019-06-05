@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2019_06_05_050743) do
     t.text "city_name"
     t.float "latitude"
     t.float "longitude"
-    t.json "weather"
+    t.jsonb "weather"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
