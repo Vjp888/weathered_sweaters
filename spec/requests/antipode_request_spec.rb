@@ -11,6 +11,8 @@ describe 'antipode requests' do
 
     expect(data['type']).to eq('antipode')
     expect(data['attributes']['location_name']).to eq('Yavi Department')
-    expect(data['attributes']['forecast']['summary']).to eq('cloudy')
+    expect(data['attributes']['forecast']['summary']).to_not be_nil
+    expect(data['attributes']['forecast']['current_tempurature']).to_not be_nil
+    expect(data['attributes']['search_location']).to eq('Hong Kong')
   end
 end

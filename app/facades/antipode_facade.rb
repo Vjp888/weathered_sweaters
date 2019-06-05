@@ -5,15 +5,14 @@ attr_reader :id, :location_name, :type, :forecast, :search_location
     @type = 'antipode'
     @location = location
     @search_location = collect_location[:location]
-    @location_name = collect_antipode(collect_location[:lat], collect_location[:lng])
-    # binding.pry
-    # @forcast = collect_forecast
-    # binding.pry
+    @antipode = collect_antipode(collect_location[:lat], collect_location[:lng])
+    @location_name = @antipode[:loc_name]
+    @forecast = collect_forecast
   end
 
   def collect_forecast
-    # darksky = DarkskyService.new.get_weather()
-    #flubbed this one kinda hard
+    darksky = DarkskyService.new.get_weather(@antipode[:loc_coords])[:currently]
+    AntipodeForecast.new(darksky)
   end
 
   def collect_location
@@ -32,7 +31,10 @@ attr_reader :id, :location_name, :type, :forecast, :search_location
       data = anti.get_antipode(lat,long)
       coords = data[:data][:attributes]
       google = GoogleService.new.get_address(coords)
-      @data = google[:results].first[:address_components].first[:long_name]
+      @data = Hash.new
+      @data[:loc_name] = google[:results].first[:address_components].first[:long_name]
+      @data[:loc_coords] = google[:results].first[:geometry][:location]
+      @data
     end
   end
 end
