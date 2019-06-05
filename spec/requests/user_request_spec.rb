@@ -10,7 +10,10 @@ describe 'When I visit /users' do
 
     data = JSON.parse(response.body)
 
+    user = User.last
+
     expect(response.code).to eq('201')
     expect(data['api_key']).to_not be_nil
+    expect(user.api_key).to eq(data['api_key'])
   end
 end
