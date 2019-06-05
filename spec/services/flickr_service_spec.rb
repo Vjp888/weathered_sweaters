@@ -7,6 +7,7 @@ describe FlickrService do
     result = flickr_service.get_image(search_params)
 
     expect(result).to be_a(Hash)
-    expect(result[:photos][:photo].first[:farm]).to eq(66)
+
+    expect(result[:photos][:photo].first[:farm]).to_not be_nil
   end
 end
